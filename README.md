@@ -164,7 +164,7 @@ Question A
 
 In this report, we will describe the steps related to the implementation of Phase 1 in the Information Retrieval course. DATA COLLECTION
 
-In this step, we collected the documents that we will use from the following link: Kaggle Dataset (the link also appears in the course slides). In this link, there are 643 artists with a total of 44824 songs (documents). When we uploaded the dataset to GitHub, it complained that the file was larger than 25MB, so we uploaded the same file compressed (zip).
+In this step, we collected the documents that we will use from the following link:https://www.kaggle.com/datasets/notshrirang/spotify-million-song-dataset Kaggle Dataset (the link also appears in the course slides). In this link, there are 643 artists with a total of 44824 songs (documents). When we uploaded the dataset to GitHub, it complained that the file was larger than 25MB, so we uploaded the same file compressed (zip).
 
 The format of the file is in .csv (comma-separated values).
 
@@ -180,6 +180,64 @@ The goal for this specific task is to create an interface where the user can ask
 
 Search: How will the search be performed, the types of questions Initially, the search will be performed through a search box which will be displayed to allow the user to enter the desired question to the database with the songs. The permissible questions that can be entered are the following: • The name of the artist • The title of a song • A specific lyric or lyrics from a song • Date of creation of the song
 
+
+Presentation of Results: How Results Will Be Presented
+
+Initially, we will retrieve the songs that satisfy the query submitted by the user, and they will be displayed in groups of 10 in descending order based on the number of occurrences of that query per song. Then, the user will have the option to view the next 10 tuples (songs) that satisfy the query. This process continues until all the songs containing that word are exhausted. On the right side of the search bar, suggested queries will also be available for the user to select and view their results.
+
+At this point, we will outline the steps that a user needs to take to run the application.
+
+Imported JARS:
+The libraries needed for importing to run the program are all the jars found within the folders "modules", "modules-thirdparty", "modules-test-framework", which concern the version of the Lucene library 9.5.0 for Java. These folders will become visible to the user upon extracting the file lucene-9.5.0.zip.
+
+Execution Steps
+
+Step 1:
+Initially, this specific step needs to be executed only once. Specifically, we need to run the class LuceneInexer.java, but before doing so, we need to configure 2 things. Within the class, specifically in the field INDEX_DIRECTORY, we need to define the path where the index for the songs will be stored. By default, we have set it to C:\temp\indexluc, where indexluc is the name of the index directory. After that, within the main method, we need to specify the path where the .csv file with the songs downloaded from Kaggle is stored so that the program can read it. After completing this step, we run this class and check if the index directory, named indexluc in our case, has been created. Once we confirm that everything is in order, we proceed to Step 2.
+
+
+Step 2:
+In this step, we will need to do something similar for the SeacrhHistoryItem.java class. Specifically, within the class and within the addToHistory method, we will need to write the path where we want the .txt file to be saved, which will contain queries that have been submitted by users in the past. To do this, we will write the path on line 120 (in the variable file). CAUTION: The txt file should be saved within the directory where we created the index based on everything mentioned in Step 1. For example, in our case where the directory of the index is indexluc, the path we will write will be C:\temp\indexluc\search_history.txt, where search_history.txt is the name of the .txt file with the previous queries. Adjust accordingly.
+
+
+
+Step 3: Configuring Additional Paths
+After successfully completing Step 2, proceed to this final step where we will configure 2-3 additional paths to run the application.
+
+1. Configuring INDEX_DIRECTORY:
+
+  Locate the LuceneIndexerGUI.java class.
+  In the INDEX_DIRECTORY field, set the path to the folder where you saved the index in Step 1.
+  Example: C:\temp\indexluc
+2. Configuring the path to the queries file:
+
+  In the constructor of the LuceneIndexerGUI.java class, modify the path of the file object.
+  Set the path to the txt file containing the queries, as specified in Step 2.
+  Example: C:\temp\indexluc\search_history.txt
+  Note: Adjust the path according to your system.
+3. Configuring the path to the file of vector representations:
+  
+  Go to the displayResults method.
+  In line 314 (File file = new File(....)), set the path to the txt file containing the vector representations of the pretrained set.
+  Example: C:\temp\indexluc\glove.6B.50d.txt (the "glove.6B.50d.txt" file with 50 dimensions from Stanford)
+4. Running the application:
+
+  If you have successfully completed Steps 1, 2, and 3, you can now run the application.
+  Run only the LuceneIndexerGUI.java class.
+  Note: You do not need to run the other 2 classes again.
+
+
+Important Information:
+  
+  Download the .csv file:
+  The .csv file has been modified from the original Kaggle file.
+  Download it from the provided zip.
+  Deleting the index folder:
+  If you delete the indexluc folder, repeat Steps 1, 2, and 3 in sequence to recreate the necessary files for the application to run.
+Note:
+  
+  Follow the instructions carefully to ensure smooth operation of the application.
+  Feel free to modify the paths and settings according to your specific needs.
 
 
 
