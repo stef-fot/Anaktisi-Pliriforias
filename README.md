@@ -140,7 +140,45 @@ https://www.kaggle.com/datasets/notshrirang/spotify-million-song-dataset
 
 
 
+University of Ioannina Department of Computer Science and Engineering
 
+Information Retrieval
+
+Team Members:
+
+Eleftherios-Christos Dritsonas, 4668 
+Stefanos Fotopoulos, 4829
+
+Academic Year 2023 DELIVERY: Friday, May 19
+
+Contents
+
+Description of the task
+Question A
+Question B
+1. Description of the task
+
+The link for the GitHub repository is as follows: GitHub Link
+
+Question A
+
+In this report, we will describe the steps related to the implementation of Phase 1 in the Information Retrieval course. DATA COLLECTION
+
+In this step, we collected the documents that we will use from the following link: Kaggle Dataset (the link also appears in the course slides). In this link, there are 643 artists with a total of 44824 songs (documents). When we uploaded the dataset to GitHub, it complained that the file was larger than 25MB, so we uploaded the same file compressed (zip).
+
+The format of the file is in .csv (comma-separated values).
+
+In the first column of the file, we see the name of the artist or the band. In the second column, we have the name of the song. The third column has the link of the song, ending in .html. Finally, the fourth column has all the lyrics of the songs.
+
+Question B Text Analysis and Indexing:
+
+After creating a StandardAnalyzer and a ByteBuffersDirectory to store the information, we need to create an IndexWriterConfig which will go through the index (in our case, the .csv file with the songs) and record its values. Then, we will have a QueryParser where we will enter all the possible queries that the user can make. Next, there is the DirectoryReader which opens the ByteBuffersDirectory we created and an IndexSearcher that aims to search how many times the user's query is satisfied. We keep this information in a hits array where we count the scores. There will also be a void function addDoc which categorizes the fields of the .csv file into the fields: Song Title, Artist Name, Date.
+
+Introduction: What is the purpose and functionality of the system?
+
+The goal for this specific task is to create an interface where the user can ask questions related to songs stored in the Database. This is achieved through a graphical interface (GUI) such as the search bar of the Google search engine, for example.
+
+Search: How will the search be performed, the types of questions Initially, the search will be performed through a search box which will be displayed to allow the user to enter the desired question to the database with the songs. The permissible questions that can be entered are the following: • The name of the artist • The title of a song • A specific lyric or lyrics from a song • Date of creation of the song
 
 
 
